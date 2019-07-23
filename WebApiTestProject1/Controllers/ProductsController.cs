@@ -7,32 +7,46 @@ using System.Web.Http;
 
 namespace WebApiTestProject1.Controllers
 {
+
+    // Using attribute routes to have all in one place in a more understandable and predictable way
+    [RoutePrefix("products")]
     public class ProductsController : ApiController
     {
-        // GET: api/Product
+        // GET: api/products
+        [HttpGet, Route("")]
         public IEnumerable<string> Get()
         {
             return new string[] { "product1", "product2" };
         }
 
-        // GET: api/Product/5
+        // GET: api/products/5
+        [HttpGet, Route("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Product
-        [HttpPost]
-        public void CreateProduct([FromBody]string value)
+        // GET: api/products/5
+        [HttpGet, Route("{id}/orders/{custId}")]
+        public string Get(int id, string custId)
+        {
+            return "product-orders-" + custId;
+        }
+
+        // POST: api/products
+        [HttpPost, Route("")]
+        public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Product/5
+        // PUT: api/products/5
+        [HttpPut, Route("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/products/5
+        [HttpDelete, Route("{id}")]
         public void Delete(int id)
         {
         }

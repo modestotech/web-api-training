@@ -13,18 +13,6 @@ namespace WebApiTestProject1
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "ProductsApi",
-                routeTemplate: "api/legacy/{id}",
-                defaults: new { controller = "product", id = RouteParameter.Optional }
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
         }
     }
 }
