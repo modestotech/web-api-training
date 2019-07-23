@@ -14,6 +14,7 @@ namespace WebApiTestProject1.Controllers
 
         // GET: api/products
         [HttpGet, Route("")]
+        [AcceptVerbs("GET", "VIEW", "BREW")] // Any verb can be used, even non-standard verbs
         public IEnumerable<string> Get()
         {
             return new string[] { "product1", "product2" };
