@@ -14,7 +14,12 @@ namespace WebApiTestProject1.Controllers
 
         // GET: api/products
         [HttpGet, Route("")]
-        [AcceptVerbs("GET", "VIEW", "BREW")] // Any verb can be used, even non-standard verbs
+        // [AcceptVerbs("GET", "VIEW")] // Any verb can be used, even non-standard verbs, this field seems to make the route not appear in Swagger doc
+        [Route("~/prods")]
+        /* 
+         * Tilde overrides the route prefix attribute, so this row enables /prods, except /products, which is already available, 
+           without the tilde the custom route would become /products/prods
+        */
         public IEnumerable<string> Get()
         {
             return new string[] { "product1", "product2" };
