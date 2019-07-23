@@ -7,11 +7,11 @@ using System.Web.Http;
 
 namespace WebApiTestProject1.Controllers
 {
-
     // Using attribute routes to have all in one place in a more understandable and predictable way
     [RoutePrefix("products")]
     public class ProductsController : ApiController
     {
+
         // GET: api/products
         [HttpGet, Route("")]
         public IEnumerable<string> Get()
@@ -20,14 +20,14 @@ namespace WebApiTestProject1.Controllers
         }
 
         // GET: api/products/5
-        [HttpGet, Route("{id}")]
+        [HttpGet, Route("{id:int:range(1000,3000)}")]
         public string Get(int id)
         {
             return "value";
         }
 
         // GET: api/products/5
-        [HttpGet, Route("{id}/orders/{custId}")]
+        [HttpGet, Route("{id:int:range(1000,3000)}/orders/{custId}")]
         public string Get(int id, string custId)
         {
             return "product-orders-" + custId;
@@ -40,13 +40,13 @@ namespace WebApiTestProject1.Controllers
         }
 
         // PUT: api/products/5
-        [HttpPut, Route("{id}")]
+        [HttpPut, Route("{id:int:range(1000,3000)}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE: api/products/5
-        [HttpDelete, Route("{id}")]
+        [HttpDelete, Route("{id:int:range(1000,3000)}")]
         public void Delete(int id)
         {
         }
