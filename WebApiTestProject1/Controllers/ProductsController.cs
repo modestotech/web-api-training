@@ -27,7 +27,7 @@ namespace WebApiTestProject1.Controllers
         }
 
         // GET: api/products/5
-        [HttpGet, Route("{id:int:range(1000,3000)}/orders/{custId}")]
+        [HttpGet, Route("{id:int:range(1000,3000)}/orders/{custId:validCustomerId}")]
         public string Get(int id, string custId)
         {
             return "product-orders-" + custId;
