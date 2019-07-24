@@ -31,5 +31,13 @@ namespace WebApiTestProject1.Controllers
         {
             return new string[] { "status1", "status2" };
         }
+
+        // GET: orders/date/7/25/2019
+        // The asterisk tells WebApi to bind to the parameter using all of the remaining segments.
+        [HttpGet, Route("date/{*dateInput:datetime}")]
+        public IEnumerable<string> GetOrderWithDate(DateTime dateInput)
+        {
+            return new string[] { "order1-" + dateInput.ToShortDateString(), "order2-" + dateInput.ToShortDateString()};
+        }
     }
 }
