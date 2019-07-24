@@ -27,9 +27,22 @@ namespace WebApiTestProject1.Controllers
 
         // GET: api/products/5
         [HttpGet, Route("{id:int:range(1000,3000)}")]
-        public string Get(int id)
+        public string GetProduct(int id)
         {
             return "value";
+        }
+
+        // GET: api/products/5
+        [HttpGet, Route("status/{status:alpha?}")]
+        // Optional value is set with a question mark (is null if nothing is passed)
+        // [HttpGet, Route("status/{status:alpha=}")]
+        // Another way to achieve default value null
+        // [HttpGet, Route("status/{status:alpha=pending}")]
+        // Default value can be set here on the method signature, safer in the method signature as 
+        // model binding might have some custom logic that in this case handles pending in some special way 
+        public string GetProductsWithStatus(string status)
+        {
+            return String.IsNullOrEmpty(status) ? "NULL" : status;
         }
 
         // GET: api/products/5
