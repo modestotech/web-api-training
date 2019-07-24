@@ -17,6 +17,7 @@ namespace WebApiTestProject1
             config.MessageHandlers.Add(new APIKeyHeaderHandler());
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new MethodOverrideHandler());
+            config.MessageHandlers.Add(new ForwardedHeadersHandler());
 
             // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
