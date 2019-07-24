@@ -103,6 +103,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\APIKeyHeaderHandler.cs" />
+    <Compile Include="Handlers\MethodOverrideHandler.cs" />
     <Compile Include="Handlers\RemoveBadHeadersHandler.cs" />
     <Compile Include="Handlers\FullPipelineTimerHandler.cs" />
     <Compile Include="Models\StringArrayWildcardBinder.cs" />

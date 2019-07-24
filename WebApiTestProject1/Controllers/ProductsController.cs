@@ -67,8 +67,9 @@ namespace WebApiTestProject1.Controllers
 
         // DELETE: api/products/5
         [HttpDelete, Route("{id:int:range(1000,3000)}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            return "Deleted id " + id;
         }
     }
 }
