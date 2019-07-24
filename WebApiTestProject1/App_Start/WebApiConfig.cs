@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using WebApiTestProject1.CustomConstraints;
+using WebApiTestProject1.Handlers;
 
 namespace WebApiTestProject1
 {
@@ -11,11 +12,14 @@ namespace WebApiTestProject1
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            // Register delegating handlers
+            config.MessageHandlers.Add(new FullPipelineTimerHandler());
 
-            // Web API routes
+            // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
             constraintResolver.ConstraintMap.Add("validCustomerId", typeof(CustomerIdConstraint));
+
+            // Web API routes
             config.MapHttpAttributeRoutes(constraintResolver);
         }
     }
