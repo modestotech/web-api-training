@@ -8,30 +8,31 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace WebApiTestProject1.Handlers
-{ 
-    public class FullPipelineTimerHandler : DelegatingHandler
+{
+    public class RemoveBadHeadersHandler : DelegatingHandler
     {
-        const string _header = "X-API-Timer";
+        readonly string[] _badHeaders = { "X-Powered-By", "X-AspNet-Version", "Server" };
 
+        // This handler doesn't work as intended as these specific headers can't be removed in this way as they have to be removed in Web.config
+        // This example shows that some things can't be achieved in the pipeline as they are part of the overlaying ASP.NET or IIS layer
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            // Step 1:
-            // Global message-level logic that muse be executed BEFORE the request is passed to the action method
-            var timer = Stopwatch.StartNew();
-
             // Step 2:
             // Call the rest of the pipeline, all the way to the response message
             var response = await base.SendAsync(request, cancellationToken);
 
             // Step 3:
             // Global message-level that must be executed AFTER the request has executed, before the final HTTP response message
-            var elapsed = timer.ElapsedMilliseconds;
-            Trace.WriteLine(" -- Pipeline+Action time msec: " + elapsed);
-            response.Headers.Add(_header, elapsed + " msec");
+            // Remove bad headers in a for loop
+            foreach (var header in _badHeaders)
+            {
+                response.Headers.Remove(header);
+            }
 
             // Step 4:
             // Return the final HTTP response
             return response;
         }
     }
+
 }
