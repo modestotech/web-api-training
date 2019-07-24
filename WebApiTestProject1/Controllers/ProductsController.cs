@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApiTestProject1.Handlers;
 
 namespace WebApiTestProject1.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebApiTestProject1.Controllers
         */
         public IEnumerable<string> Get()
         {
-            return new string[] { "product1", "product2" };
+            return new string[] { "product1", "product2", Request.GetApiKey() };
         }
 
         // GET: api/products/5

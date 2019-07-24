@@ -14,6 +14,7 @@ namespace WebApiTestProject1
         {
             // Register delegating handlers
             config.MessageHandlers.Add(new FullPipelineTimerHandler());
+            config.MessageHandlers.Add(new APIKeyHeaderHandler());
 
             // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
