@@ -8,17 +8,17 @@ using WebApiTestProject1.Filters;
 
 namespace WebApiTestProject1.Controllers
 {
-    [ActionFilterTemplate] // Declare a filter to use for this controller
-    public class FilterController : ApiController
+    [RoutePrefix("filters")]
+    public class FiltersController : ApiController
     {
-        [ActionFilterTemplate]
+        [HttpGet, Route("")]
+        [RouteTimerFilter("GettAllValues")] // Overrides the name
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        [OverrideActionFilters] // Override any action filter declared globally
-        [ActionFilterTemplate] // And declare a filter to use here
+        [HttpGet, Route("{id:int}")]
         public string Get(int id)
         {
             return "value-" + id;

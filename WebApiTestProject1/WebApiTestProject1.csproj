@@ -96,11 +96,12 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DummyController.cs" />
-    <Compile Include="Controllers\FilterController.cs" />
+    <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="CustomConstraints\CustomerIdConstraint.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\DelegatingHandlerTemplate.cs" />
+    <Compile Include="Filters\RouteTimerFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

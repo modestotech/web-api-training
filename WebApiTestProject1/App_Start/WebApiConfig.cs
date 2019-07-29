@@ -13,6 +13,9 @@ namespace WebApiTestProject1
     {
         public static void Register(HttpConfiguration config)
         {
+            // This flag makes the API prefer the controller instead of the directory
+            System.Web.Routing.RouteTable.Routes.RouteExistingFiles = true;
+
             // Register delegating handlers
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new APIKeyHeaderHandler());
@@ -23,6 +26,9 @@ namespace WebApiTestProject1
             // Register Authenthication, Authorization and Action filters (for those that should be active globally)
             // Usually preferrable to register them per controller, or even per route
             // config.Filters.Add(new ActionFilterTemplateAttribute());
+
+            // Global registration, as AllowMultiple = true is set on the FilterAttribute, there can be multiple instances
+            config.Filters.Add(new RouteTimerFilterAttribute("Global"));
 
             // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
