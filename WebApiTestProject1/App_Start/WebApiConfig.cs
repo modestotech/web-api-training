@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using WebApiTestProject1.CustomConstraints;
+using WebApiTestProject1.Filters;
 using WebApiTestProject1.Handlers;
 
 namespace WebApiTestProject1
@@ -18,6 +19,10 @@ namespace WebApiTestProject1
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new MethodOverrideHandler());
             config.MessageHandlers.Add(new ForwardedHeadersHandler());
+
+            // Register Authenthication, Authorization and Action filters (for those that should be active globally)
+            // Usually preferrable to register them per controller, or even per route
+            // config.Filters.Add(new ActionFilterTemplateAttribute());
 
             // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
