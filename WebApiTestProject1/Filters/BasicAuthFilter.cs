@@ -37,14 +37,14 @@ namespace WebApiTestProject1.Filters
             var credentials = authHeader.Parameter;
             if (string.IsNullOrEmpty(credentials))
             {
-                context.ErrorResult = new AuthentiationFailureResult("Missing credentials", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Missing credentials", context.Request);
             }
 
             IPrincipal principal = await ValidateCredentialsAsync(credentials, cancellationToken);
 
             if (principal == null)
             {
-                context.ErrorResult = new AuthentiationFailureResult("Invalid credentials", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Invalid credentials", context.Request);
             }
             else
             {

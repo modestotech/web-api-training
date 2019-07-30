@@ -13,7 +13,7 @@ namespace WebApiTestProject1.Filters
     /// <summary>
     /// Genereic authenthication failure action result, for use in authentication filters
     /// </summary>
-    public class AuthentiationFailureResult : IHttpActionResult
+    public class AuthenticationFailureResult : IHttpActionResult
     {
         /// <summary>
         /// Optional override value for the ReasonPhrase on the final 
@@ -30,7 +30,7 @@ namespace WebApiTestProject1.Filters
         /// Constructor taking an override value for ReasonPhrase to use instead of "Unauthorized", 
         /// plues the original HttpRequestMessage.
         /// </summary>
-        public AuthentiationFailureResult(string reasonPhrase, HttpRequestMessage request)
+        public AuthenticationFailureResult(string reasonPhrase, HttpRequestMessage request)
         {
             ReasonPhrase = reasonPhrase;
             Request = request;

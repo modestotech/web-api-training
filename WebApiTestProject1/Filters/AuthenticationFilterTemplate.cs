@@ -74,7 +74,7 @@ namespace WebApiTestProject1.Filters
             if (string.IsNullOrEmpty(credentials))
             {
                 // No credentials sent with the scheme, abort out of the pipeline with an error result
-                context.ErrorResult = new AuthentiationFailureResult("Missing credentials", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Missing credentials", context.Request);
             }
 
             // STEP 4: Validate the credentials. Return an error if invalid, else set the IPrincipal on the context.
@@ -82,7 +82,7 @@ namespace WebApiTestProject1.Filters
 
             if (principal == null)
             {
-                context.ErrorResult = new AuthentiationFailureResult("Invalid credentials", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Invalid credentials", context.Request);
             }
             else
             {

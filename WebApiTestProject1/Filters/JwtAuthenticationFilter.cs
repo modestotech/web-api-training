@@ -48,7 +48,7 @@ namespace WebApiTestProject1.Filters
             var credentials = authHeader.Parameter;
             if (string.IsNullOrEmpty(credentials))
             {
-                context.ErrorResult = new AuthentiationFailureResult("Missing credentials", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Missing credentials", context.Request);
                 return;
             }
 
@@ -58,7 +58,7 @@ namespace WebApiTestProject1.Filters
 
                 if (principal == null)
                 {
-                    context.ErrorResult = new AuthentiationFailureResult("Invalid security token", context.Request);
+                    context.ErrorResult = new AuthenticationFailureResult("Invalid security token", context.Request);
                 }
                 else
                 {
@@ -70,11 +70,11 @@ namespace WebApiTestProject1.Filters
                                             stex is SecurityTokenNoExpirationException ||
                                             stex is SecurityTokenNotYetValidException)
             {
-                context.ErrorResult = new AuthentiationFailureResult("Security token lifetime error", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Security token lifetime error", context.Request);
             }
             catch (Exception)
             {
-                context.ErrorResult = new AuthentiationFailureResult("Invalid security token", context.Request);
+                context.ErrorResult = new AuthenticationFailureResult("Invalid security token", context.Request);
             }
 
         }
@@ -136,26 +136,6 @@ namespace WebApiTestProject1.Filters
             ((ClaimsIdentity)principal.Identity).BootstrapContext = credentials;
 
             return await Task.FromResult(principal);
-        }
-
-        private Tuple<string, string> ParseBasicAuthCredential(string credential)
-        {
-            string password = null;
-
-            var subject = (Encoding.GetEncoding("iso-8859-1")
-                .GetString(Convert.FromBase64String(credential)));
-
-            if (string.IsNullOrEmpty(subject))
-                return new Tuple<string, string>(null, null);
-
-            if (subject.Contains(":"))
-            {
-                var index = subject.IndexOf(':');
-                password = subject.Substring(index + 1);
-                subject = subject.Substring(0, index);
-            }
-
-            return new Tuple<string, string>(subject, password);
         }
     }
 }

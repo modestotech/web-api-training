@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApiTestProject1.Filters;
 
 namespace WebApiTestProject1.Controllers
 {
@@ -15,6 +16,8 @@ namespace WebApiTestProject1.Controllers
         [HttpGet, Route("")]
         // [Authorize] // Flag to check if a proper IPrinciple is set, if not set in WebApiConfig.cs
         // [AllowAnonymous] // Overrides the authorize from the WebApiConfig layer to allow anonymous
+        // [OverrideAuthentication] // Overrides the complete authentication stack for this route
+        // [JwtAuthenticationFilter] // Applies the JwtAuthenticationFilter for this route
         public IEnumerable<string> Get()
         {
             return new string[] { User.Identity.Name, User.Identity.AuthenticationType };
