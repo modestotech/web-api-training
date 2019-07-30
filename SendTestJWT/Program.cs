@@ -21,12 +21,13 @@ namespace SendTestJWT
 
             // The tokes isser urn, and the audience urn I intend this token for
             string _issuer = "http://my.tokenissuer.com";
-            string _audience = "http://localhost:64827";
+            string _audience = "https://my.company.com";
 
             // Load the private key certificate from the local file
             string path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
             var directory = System.IO.Path.GetDirectoryName(path);
-            var certFile = (directory + "\\Certificate\\CourseCert.pfx").Substring(6);
+            var certFilePre = directory + "\\Certificate\\CourseCert.pfx";
+            var certFile = "\\" + certFilePre.Substring(5);
             var certificate = new X509Certificate2();
             certificate.Import(certFile, "abc12345", X509KeyStorageFlags.PersistKeySet);
 

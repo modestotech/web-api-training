@@ -19,7 +19,7 @@ namespace WebApiTestProject1.Filters
         public const string SupportedTokenScheme = "Bearer";
         public bool AllowMultiple { get { return false; } }
 
-        string _audience = "http://localhost:64827";
+        string _audience = "https://my.company.com";
         string _validIssuer = "http://my.tokenissuer.com";
 
         private readonly X509SecurityKey _signingCredentials;
