@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -17,18 +17,22 @@ namespace WebApiTestProject1
             System.Web.Routing.RouteTable.Routes.RouteExistingFiles = true;
 
             // Register delegating handlers
+            /*
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new APIKeyHeaderHandler());
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new MethodOverrideHandler());
             config.MessageHandlers.Add(new ForwardedHeadersHandler());
+            */
 
             // Register Authenthication, Authorization and Action filters (for those that should be active globally)
             // Usually preferrable to register them per controller, or even per route
             // config.Filters.Add(new ActionFilterTemplateAttribute());
 
             // Global registration, as AllowMultiple = true is set on the FilterAttribute, there can be multiple instances
+            /*
             config.Filters.Add(new RouteTimerFilterAttribute("Global"));
+            */
 
             // Register contraint resolvers
             var constraintResolver = new DefaultInlineConstraintResolver();
