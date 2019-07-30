@@ -16,6 +16,9 @@ namespace WebApiTestProject1
             // See AuthenticationFilterTemplate for explanation
             config.SuppressHostPrincipal();
 
+            config.Filters.Add(new BasicAuthFilter());
+            config.Filters.Add(new AuthorizeAttribute());
+
             // This flag makes the API prefer the controller instead of the directory
             System.Web.Routing.RouteTable.Routes.RouteExistingFiles = true;
 
