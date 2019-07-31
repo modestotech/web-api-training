@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -108,18 +108,22 @@
     <Compile Include="ActionResults\AddHeaderResult.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AuthFilters\RequireAPIKeyFilter.cs" />
+    <Compile Include="AuthFilters\RequireClaim.cs" />
+    <Compile Include="AuthFilters\RequireHttpsFilter.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\DummyController.cs" />
     <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\ModelsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ReturnTypesController.cs" />
-    <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
-    <Compile Include="Filters\ApiKeyAuthenticationFilter.cs" />
-    <Compile Include="Filters\AuthenticationFailureResult.cs" />
-    <Compile Include="Filters\AuthenticationFilterTemplate.cs" />
-    <Compile Include="Filters\BasicAuthFilter.cs" />
-    <Compile Include="Filters\JwtAuthenticationFilter.cs" />
+    <Compile Include="AuthFilters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="AuthFilters\ApiKeyAuthenticationFilter.cs" />
+    <Compile Include="AuthFilters\AuthenticationFailureResult.cs" />
+    <Compile Include="AuthFilters\AuthenticationFilterTemplate.cs" />
+    <Compile Include="AuthFilters\AuthorizationFilterTemplate.cs" />
+    <Compile Include="AuthFilters\BasicAuthFilter.cs" />
+    <Compile Include="AuthFilters\JwtAuthenticationFilter.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="CustomConstraints\CustomerIdConstraint.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Handlers\MethodOverrideHandler.cs" />
     <Compile Include="Handlers\RemoveBadHeadersHandler.cs" />
     <Compile Include="Handlers\FullPipelineTimerHandler.cs" />
+    <Compile Include="Helpers\Validation.cs" />
     <Compile Include="Models\MoreComplexTypeDto.cs" />
     <Compile Include="Models\ComplexTypeDto.cs" />
     <Compile Include="Models\StringArrayWildcardBinder.cs" />

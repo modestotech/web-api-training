@@ -77,7 +77,7 @@ namespace WebApiTestProject1.Filters
         private async Task<IPrincipal> ValidateCredentialsAsync(string credentials, CancellationToken cancellationToken)
         {
             // validate the 8 char length requirement
-            if (credentials.Length != 8)
+            if (!Helpers.Validation.IsValidApiKey(credentials))
                 return null;
 
             IList<Claim> claimCollection = new List<Claim>

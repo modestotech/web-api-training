@@ -16,21 +16,19 @@ namespace WebApiTestProject1
             // See AuthenticationFilterTemplate for explanation
             config.SuppressHostPrincipal();
 
-            // config.Filters.Add(new BasicAuthFilter());
+            config.Filters.Add(new BasicAuthFilter());
             config.Filters.Add(new ApiKeyAuthenticationFilter());
             config.Filters.Add(new AuthorizeAttribute());
 
             // This flag makes the API prefer the controller instead of the directory
             System.Web.Routing.RouteTable.Routes.RouteExistingFiles = true;
 
-            // Register delegating handlers
-            /*
+            // Register delegating handlers            
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new APIKeyHeaderHandler());
             config.MessageHandlers.Add(new RemoveBadHeadersHandler());
             config.MessageHandlers.Add(new MethodOverrideHandler());
             config.MessageHandlers.Add(new ForwardedHeadersHandler());
-            */
 
             // Register Authenthication, Authorization and Action filters (for those that should be active globally)
             // Usually preferrable to register them per controller, or even per route

@@ -1,61 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using WebApiTestProject1.Handlers;
 
 namespace WebApiTestProject1.Filters
 {
-    /// <summary>
-    /// Authorization happens AFTER authentication. By the time your authorization
-    /// filter is called, the authenicated identity should be set (if credentails were provided).
-    /// </summary>
-    // TODO:    Decide if your filter should allow multiple instances per controller or
-    //          per-method; set AllowMultiple to false if not.
-    public class AuthorizationFilterTemplateAttribute : AuthorizationFilterAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    public class RequireApiKey : AuthorizationFilterAttribute
     {
-        // TODO:    If you need constructor arguments, create properties to hold them
-        //          and public constructors that accept them.
-        public AuthorizationFilterTemplateAttribute()
-        { }
+        /// <summary>
+        /// Hold the type of key the action method requires
+        /// </summary>
+        public string ApiKeyType;
 
-        public override async Task OnAuthorizationAsync(HttpActionContext actionContext,
+        /// <summary>
+        /// Constructor taking optional action method key type
+        /// </summary>
+        public RequireApiKey(string sType = null)
+        {
+            if (sType == "R" || sType == "W" || sType == null)
+                ApiKeyType = sType;
+            else
+                throw new ArgumentException("Api key type must be R, W or null", "sType");
+        }
+
+        /// <summary>
+        /// Called when authorization must be checked; verify the api key is present and 
+        /// matches the action method requirement of key type
+        /// </summary>
+        public override Task OnAuthorizationAsync(HttpActionContext actionContext,
             CancellationToken cancellationToken)
         {
-            // STEP1:   Perform your authorizaton logic
-            // The authentication filters should have set an IPrincipal for your
-            // with various properties
-            var principal = actionContext.RequestContext.Principal;
-
-            // ...though it's possible to have an authorization filter withour or
-            // independent of authentication; perhaps based the presence of certain
-            // http headers in the request. In that case use the appropriate logic.
-
-            // You can cast the IPrincipal to a specific class type to access the
-            // claims or priperties of the authenticated principal:
-            //var specificIdentityType = principal.Identity as ClaimsIdentity;
-            //var claim = specificIdentityType.Claims.FirstOrDefault(a => a.Type.Equals("MyClaim"));
-
-            var authorized = true; // Could also be async authorizaton logic
-
-            // STEP2:   If authorization fails, set the HTTP response and exit
-            if (!authorized)
+            // grab the api key the delegating handler may have stored for us to use using the extension method
+            var sKey = actionContext.Request.GetApiKey();
+            // validate the key - check for missing or invalid key
+            if (Helpers.Validation.IsValidApiKey(sKey))
             {
-                // Which code to return is by default 403, but some prefer 404
-                // to not reveal to hackers that they were blocked by an authorization
-                // issue.
+                // return a 403 Forbidden, since the key was not valid
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden)
-                ; //{ Content = ...};
-                return;
+                {
+                    ReasonPhrase = "Invalid API key"
+                };
+                return Task.FromResult(0);
             }
-
-            await base.OnAuthorizationAsync(actionContext, cancellationToken);        
+            // we only need to check for a specific key type if one was required
+            if (!string.IsNullOrEmpty(ApiKeyType))
+            {
+                // check for the specific key type; really only need to check for W action using W key,
+                //  since R actions work with any key, R or W.
+                if ((ApiKeyType.Equals("W") && !sKey.StartsWith("W")))
+                {
+                    // return a 403 Forbidden, since the key was not valid for the action
+                    actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden)
+                    {
+                        ReasonPhrase = "Invalid API key"
+                    };
+                    return Task.FromResult(0);
+                }
+            }
+            return base.OnAuthorizationAsync(actionContext, cancellationToken);
         }
     }
 }
