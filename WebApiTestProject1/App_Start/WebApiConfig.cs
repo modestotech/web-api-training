@@ -6,6 +6,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Routing;
 using WebApiTestProject1.CustomConstraints;
 using WebApiTestProject1.ExceptionFilters;
+using WebApiTestProject1.ExceptionHandlers;
 using WebApiTestProject1.Filters;
 using WebApiTestProject1.Handlers;
 
@@ -18,7 +19,7 @@ namespace WebApiTestProject1
             // See AuthenticationFilterTemplate for explanation
             config.SuppressHostPrincipal();
 
-            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             config.Filters.Add(new NotImplementedExceptionFilter());
 

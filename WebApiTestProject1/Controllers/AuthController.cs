@@ -19,9 +19,10 @@ namespace WebApiTestProject1.Controllers
         // [OverrideAuthentication] // Overrides the complete authentication stack for this route
         // [JwtAuthenticationFilter] // Applies the JwtAuthenticationFilter for this route
         // [RequireHttps] // For requiring https as authorization
-        [RequireApiKey("W")]
+        // [RequireApiKey("W")]
         public IEnumerable<string> Get()
         {
+            throw new InvalidOperationException();
             return new string[] { User.Identity.Name, User.Identity.AuthenticationType };
         }
 
