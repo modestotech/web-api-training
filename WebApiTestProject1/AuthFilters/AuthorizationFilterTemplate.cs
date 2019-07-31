@@ -38,7 +38,7 @@ namespace WebApiTestProject1.Filters
             // grab the api key the delegating handler may have stored for us to use using the extension method
             var sKey = actionContext.Request.GetApiKey();
             // validate the key - check for missing or invalid key
-            if (Helpers.Validation.IsValidApiKey(sKey))
+            if (!Helpers.Validation.IsValidApiKey(sKey))
             {
                 // return a 403 Forbidden, since the key was not valid
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden)

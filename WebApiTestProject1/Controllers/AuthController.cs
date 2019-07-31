@@ -26,14 +26,17 @@ namespace WebApiTestProject1.Controllers
         }
 
         // GET: api/Auth/5
+        [HttpGet, Route("{id:int}")]
         public string Get(int id)
         {
+            throw new ArgumentOutOfRangeException("id", "IDs must be in the range 1 to 50");
             return "value";
         }
 
         // POST: api/Auth
         public void Post([FromBody]string value)
         {
+            throw new NotImplementedException();
         }
 
         // PUT: api/Auth/5
