@@ -129,6 +129,8 @@
     <Compile Include="ExceptionFilters\ExceptionFilterTemplate.cs" />
     <Compile Include="ExceptionHandlers\GlobalExceptionHandler.cs" />
     <Compile Include="ExceptionHandlers\GlobalExceptionHandlerTemplate.cs" />
+    <Compile Include="ExceptionLoggers\GlobalExceptionLogger.cs" />
+    <Compile Include="ExceptionLoggers\GlobalExceptionLoggerTemplate.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="CustomConstraints\CustomerIdConstraint.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
