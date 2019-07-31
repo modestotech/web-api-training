@@ -18,6 +18,7 @@ namespace WebApiTestProject1.Controllers
         // [AllowAnonymous] // Overrides the authorize from the WebApiConfig layer to allow anonymous
         // [OverrideAuthentication] // Overrides the complete authentication stack for this route
         // [JwtAuthenticationFilter] // Applies the JwtAuthenticationFilter for this route
+        [RequireHttps]
         public IEnumerable<string> Get()
         {
             return new string[] { User.Identity.Name, User.Identity.AuthenticationType };
